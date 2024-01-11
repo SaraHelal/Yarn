@@ -2,6 +2,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { usePathname } from "next/navigation";
+import { FlexContainer } from "../styles/global";
 
 function NavBar() {
   const pathname = usePathname()
@@ -32,12 +33,12 @@ function NavBar() {
   return (
     <NavMenu>
       <img src="./images/logo.png" alt="logo" width={120} height={120} />
-      <div className="flex justify-end gap-8">
+      <FlexContainer style={{gap: '2rem'}}>
         <MenuLink href={"/"} $primary = {pathname ==="/" ? true : false} >
           Home
         </MenuLink>
         <MenuLink href={"/try-me"} $primary = {pathname ==="/try-me" ? true : false}>Try</MenuLink>
-      </div>
+      </FlexContainer>
     </NavMenu>
   );
 }

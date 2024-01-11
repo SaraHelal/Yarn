@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import styled, { css } from "styled-components";
-import { ActionButton, Container } from "@/app/styledComponents/global";
+import { ActionButton, Container } from "@/app/styles/global";
 function Header() {
   const Button = styled.button<{ $primary?: boolean }>`
     background: transparent;

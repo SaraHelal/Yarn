@@ -3,7 +3,7 @@ import Header from './components/header/Header'
 import NavBar from'./components/NavBar'
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex flex-col">
       {/* <NavBar /> */}
       <Header />
     </main>

@@ -3,10 +3,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
 import { MdKeyboardVoice } from "react-icons/md";
-
+import { FaCircleCheck } from "react-icons/fa6";
 import { CiPause1 } from "react-icons/ci";
 import styled from "styled-components";
-import { ActionButton } from "../styledComponents/global";
+import { ActionButton } from "../styles/global";
 import { useRouter } from "next/navigation";
 declare global {
   interface Window {
@@ -21,7 +21,7 @@ const FlexContainer = styled.div`
 `;
 const CenteredFlexContainer = styled(FlexContainer)`
   flex-direction: column;
-  min-height: 100vh;
+  height: 87vh;
 `;
 const RoundedBorder = styled.button`
   border: 1px solid black;
@@ -142,6 +142,8 @@ function TryMe() {
 
       {recordingCompleted && (
         <MessageWrapper>
+          <FaCircleCheck size={70} fill="green"/>
+
           <RecordingInfoWrapper2
             style={{ border: "none", background: "transparent" }}
           >

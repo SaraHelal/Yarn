@@ -18,3 +18,9 @@ export const ActionButton = styled.div`
   margin: 1rem 0;
   cursor: pointer;
 `;
+export const FlexContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+`;
