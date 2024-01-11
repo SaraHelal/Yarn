@@ -1,10 +1,10 @@
 "use client";
-import Image from "next/image";
 import React from "react";
 import styled, { css } from "styled-components";
-import { Container } from "../styledComponents/global";
+import { usePathname } from "next/navigation";
 
-function NabBar() {
+function NavBar() {
+  const pathname = usePathname()
   const NavMenu = styled.div`
     display: flex;
     justify-content: space-between;
@@ -22,22 +22,24 @@ function NabBar() {
         color: #f47a52;
         text-decoration: underline;
         pointer-events: none;
-        cursor: default;     
+        cursor: default;
       `}
   `;
-   const MenuContainer =styled.div`
-        display:flex;
-        justify-content:space-between;
-   `
+  const MenuContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+  `;
   return (
     <NavMenu>
-        <img src="./images/logo.png" alt="logo" width={120} height={120} />
-        <div className="flex justify-end gap-8">
-          <MenuLink href={"/"} $primary>Home</MenuLink>
-          <MenuLink href={"/try-me"}>Try</MenuLink>
-        </div>
+      <img src="./images/logo.png" alt="logo" width={120} height={120} />
+      <div className="flex justify-end gap-8">
+        <MenuLink href={"/"} $primary = {pathname ==="/" ? true : false} >
+          Home
+        </MenuLink>
+        <MenuLink href={"/try-me"} $primary = {pathname ==="/try-me" ? true : false}>Try</MenuLink>
+      </div>
     </NavMenu>
   );
 }
 
-export default NabBar;
+export default NavBar;
