@@ -55,7 +55,7 @@ function Header() {
             Say goodbye to passive screentime. Embrace AI-powered, interactive
             stories that amplify your child’s unique imagination.
           </Title>
-          <ActionButton>
+          <ActionButton href={"/try-me"}>
             Try me
           </ActionButton>
         </InfoHeader>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   padding: 2rem 13rem;
 `;
-export const ActionButton = styled.div`
+export const ActionButton = styled.a`
   background-color: #54194f;
   color: white;
   text-decoration: none;
