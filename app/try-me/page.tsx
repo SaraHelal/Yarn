@@ -1,13 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
 import { MdKeyboardVoice } from "react-icons/md";
 
 import { CiPause1 } from "react-icons/ci";
 import styled from "styled-components";
 import { ActionButton } from "../styledComponents/global";
-
+declare global {
+  interface Window {
+    webkitSpeechRecognition: any;
+  }
+}
 const CenteredFlexContainer = styled.div`
   display: flex;
   align-items: center;
@@ -67,28 +71,55 @@ const StopRecordingButton = styled(ActionButton)`
   border-radius: 48px;
 `;
 function TryMe() {
-  const [recordingMsg, setRecordingMsg] = useState<string>("Hello");
+  const [recordingMsg, setRecordingMsg] = useState<string>("");
   const [isRecording, setIsRecording] = useState<boolean>(false);
+  const [pauseRecording, setPauseRecording] = useState<boolean>(false);
   const [recordingCompleted, setRecordingCompleted] = useState<boolean>(false);
+  const recognitionRef = useRef<any>(null);
+
   const handleRecording = () => {
-    setIsRecording(!isRecording);
+    if (!isRecording) {
+      setIsRecording(true);
+
+      recognitionRef.current = new window.webkitSpeechRecognition();
+      recognitionRef.current.continuous = true;
+      recognitionRef.current.interimResults = true;
+
+      // Event handler for speech recognition results
+      recognitionRef.current.onresult = (event: any) => {
+        const { transcript } = event.results[event.results.length - 1][0];
+        setRecordingMsg(transcript);
+      };
+      recognitionRef.current.start();
+    } else {
+
+      setIsRecording(false);
+      // setPauseRecording(true);
+    }
   };
+
+  useEffect(()=>{
+    if(recognitionRef.current && !isRecording){
+      recognitionRef.current.stop();
+    }
+    return ()=>{
+      recognitionRef?.current?.stop();
+    }
+  },[isRecording])
   return (
     <CenteredFlexContainer>
       <RoundedBorder onClick={handleRecording}>
         {isRecording && (
           <MessageWrapper>
-            <RecordingInfoWrapper2>
-              {recordingMsg}
-            </RecordingInfoWrapper2>
+            <RecordingInfoWrapper2>{recordingMsg}</RecordingInfoWrapper2>
             <StopRecordingButton>Stop Recording</StopRecordingButton>
           </MessageWrapper>
         )}
         {!isRecording ? (
           <MdOutlineKeyboardVoice size="70" fill="white" />
         ) : (
-          // <CiPause1 size="70" fill= "white"/>
-          <MdKeyboardVoice size="70" fill="white" />
+          <CiPause1 size="70" fill= "white"/>
+          // <MdKeyboardVoice size="70" fill="white" />
         )}
       </RoundedBorder>
     </CenteredFlexContainer>
