@@ -11,7 +11,7 @@ function NabBar() {
     padding: 2rem 13rem;
     background-color: #ffd4ac;
   `;
-  const MenuButton = styled.button<{ $primary?: boolean }>`
+  const MenuLink = styled.a<{ $primary?: boolean }>`
     font-weight: bold;
     font-size: 1.2rem;
     color: #54194f;
@@ -21,6 +21,8 @@ function NabBar() {
       css`
         color: #f47a52;
         text-decoration: underline;
+        pointer-events: none;
+        cursor: default;     
       `}
   `;
    const MenuContainer =styled.div`
@@ -31,8 +33,8 @@ function NabBar() {
     <NavMenu>
         <img src="./images/logo.png" alt="logo" width={120} height={120} />
         <div className="flex justify-end gap-8">
-          <MenuButton $primary>Home</MenuButton>
-          <MenuButton>Try</MenuButton>
+          <MenuLink href={"/"} $primary>Home</MenuLink>
+          <MenuLink href={"/try-me"}>Try</MenuLink>
         </div>
     </NavMenu>
   );
