@@ -8,6 +8,7 @@ import { CiPause1 } from "react-icons/ci";
 import styled from "styled-components";
 import { ActionButton } from "../styles/global";
 import { useRouter } from "next/navigation";
+import recordToAPI from '@/app/api/RecordToAPI';
 declare global {
   interface Window {
     webkitSpeechRecognition: any;
@@ -31,7 +32,6 @@ const RoundedBorder = styled.button`
   cursor: pointer;
 `;
 const MessageWrapper = styled.span`
-  padding: 2rem;
   background: transparent;
   width: 29rem;
   display: flex;
@@ -72,6 +72,7 @@ const RecordingButton = styled(ActionButton)<{
   width: max-content;
   border-radius: 48px;
 `;
+
 function TryMe() {
   const [recordingMsg, setRecordingMsg] = useState<string>("");
   const [isRecording, setIsRecording] = useState<boolean>(false);
@@ -95,16 +96,15 @@ function TryMe() {
       };
       recognitionRef.current.start();
     } else {
-      console.log("stop recording, ");
       setPauseRecording(true);
       setIsRecording(false);
-      // if (recognitionRef.current) {
-      //   recognitionRef?.current?.stop();
-      // }
     }
   };
   const stopRecording = () => {
     setRecordingCompleted(true);
+    recognitionRef.current && recognitionRef?.current?.abort();
+    recordingMsg && recordToAPI(recordingMsg);
+
   };
   const recordingAgain = () => {
     setRecordingCompleted(false);
@@ -113,8 +113,8 @@ function TryMe() {
   };
   useEffect(() => {
     return () => {
-      if (recognitionRef.current) {
-        recognitionRef?.current?.stop();
+      if (recognitionRef.current && recordingCompleted) {
+        recognitionRef?.current?.abort();
       }
     };
   }, [isRecording]);

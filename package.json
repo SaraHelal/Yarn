@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@swc/plugin-styled-components": "^1.5.108",
+    "axios": "^1.6.5",
+    "json-server": "^1.0.0-alpha.19",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",

@@ -3,6 +3,8 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { usePathname } from "next/navigation";
 import { FlexContainer } from "../styles/global";
+import Image from "next/image";
+import Link from "next/link";
 
 function NavBar() {
   const pathname = usePathname()
@@ -32,7 +34,7 @@ function NavBar() {
   `;
   return (
     <NavMenu>
-      <img src="./images/logo.png" alt="logo" width={120} height={120} />
+      <Link href="/"><img src="./images/logo.png" alt="logo" width={150} height={150} /></Link>
       <FlexContainer style={{gap: '2rem'}}>
         <MenuLink href={"/"} $primary = {pathname ==="/" ? true : false} >
           Home
