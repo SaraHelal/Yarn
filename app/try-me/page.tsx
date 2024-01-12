@@ -8,7 +8,7 @@ import { CiPause1 } from "react-icons/ci";
 import styled from "styled-components";
 import { ActionButton } from "../styles/global";
 import { useRouter } from "next/navigation";
-import recordToAPI from '@/app/api/RecordToAPI';
+import recordToAPI from "@/app/api/RecordToAPI";
 declare global {
   interface Window {
     webkitSpeechRecognition: any;
@@ -41,28 +41,18 @@ const MessageWrapper = styled.span`
 `;
 
 const RecordingInfoWrapper = styled.span`
-  border: 1px solid black;
-  padding: 2rem;
-  background: #ffffff;
-  width: 22rem;
-  height: 9rem;
-  display: flex;
-  position: absolute;
-  top: 20%;
-  right: 38%;
-  bottom: 0;
-  align-items: center;
-  justify-content: center;
-`;
-const RecordingInfoWrapper2 = styled.span`
   border: 1px solid #d1caca;
   width: 100%;
-  display: block;
   background: white;
   padding: 1.5rem;
   text-align: center;
   font-size: 1.5rem;
   font-family: monospace;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  min-height: 7rem;
+  position: relative;
 `;
 const RecordingButton = styled(ActionButton)<{
   $again?: boolean;
@@ -71,6 +61,22 @@ const RecordingButton = styled(ActionButton)<{
   background-color: ${(props) => (props.$back ? "#54194f" : "#f47a52")};
   width: max-content;
   border-radius: 48px;
+`;
+
+const RecordingHeader = styled.div`
+position: absolute;
+left: 8px;
+top: 7px;
+display: flex;
+gap: 0.3rem;
+align-items: center;
+`;
+const RecordingNowIcon = styled.span`
+  width: 0.7rem;
+  height: 0.7rem;
+  display: block;
+  background-color: red;
+  border-radius: 50%;
 `;
 
 function TryMe() {
@@ -104,7 +110,6 @@ function TryMe() {
     setRecordingCompleted(true);
     recognitionRef.current && recognitionRef?.current?.abort();
     recordingMsg && recordToAPI(recordingMsg);
-
   };
   const recordingAgain = () => {
     setRecordingCompleted(false);
@@ -126,14 +131,21 @@ function TryMe() {
             <MdOutlineKeyboardVoice size="70" fill="white" />
           </RoundedBorder>
         ) : (
-          <RoundedBorder style={{ cursor: "default" }} disabled>
+          <RoundedBorder style={{ cursor: "not-allowed" }} disabled>
             <MdKeyboardVoice size="70" fill="white" />
           </RoundedBorder>
         ))}
 
       {!recordingCompleted && (isRecording || recordingMsg) && (
         <MessageWrapper>
-          <RecordingInfoWrapper2>{recordingMsg}</RecordingInfoWrapper2>
+          <RecordingInfoWrapper>
+            <RecordingHeader>
+              <RecordingNowIcon />
+              <span className="text-gray-400 text-base">Recording now ...</span>
+            </RecordingHeader>
+
+            {recordingMsg}
+          </RecordingInfoWrapper>
           <RecordingButton onClick={stopRecording}>
             Stop Recording
           </RecordingButton>
@@ -142,19 +154,21 @@ function TryMe() {
 
       {recordingCompleted && (
         <MessageWrapper>
-          <FaCircleCheck size={70} fill="green"/>
+          <FaCircleCheck size={70} fill="green" />
 
-          <RecordingInfoWrapper2
+          <RecordingInfoWrapper
             style={{ border: "none", background: "transparent" }}
           >
             Thanks for recording
-          </RecordingInfoWrapper2>
+          </RecordingInfoWrapper>
           <FlexContainer>
             <RecordingButton $again onClick={recordingAgain}>
               Record again
             </RecordingButton>
-            <RecordingButton $back onClick={() => router.push('/', { scroll: false })
-}>
+            <RecordingButton
+              $back
+              onClick={() => router.push("/", { scroll: false })}
+            >
               Return to Home
             </RecordingButton>
           </FlexContainer>
