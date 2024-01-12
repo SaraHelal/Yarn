@@ -16,6 +16,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.0",
+    "react-mic": "^12.4.6",
+    "react-voice-recorder": "^2.1.2",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {

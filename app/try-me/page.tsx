@@ -1,14 +1,16 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { MdOutlineKeyboardVoice } from "react-icons/md";
-import { MdKeyboardVoice } from "react-icons/md";
-import { FaCircleCheck } from "react-icons/fa6";
-import { CiPause1 } from "react-icons/ci";
+// import { MdOutlineKeyboardVoice } from "react-icons/md";
+// import { MdKeyboardVoice } from "react-icons/md";
+// import { FaCircleCheck } from "react-icons/fa6";
+// import { CiPause1 } from "react-icons/ci";
+// import { FaStop } from "react-icons/fa";
 import styled from "styled-components";
 import { ActionButton } from "../styles/global";
-import { useRouter } from "next/navigation";
-import recordToAPI from "@/app/api/RecordToAPI";
+// import { useRouter } from "next/navigation";
+// import recordToAPI from "@/app/api/RecordToAPI";
+import ReactRecorder from '../components/ReactRecorder'
 declare global {
   interface Window {
     webkitSpeechRecognition: any;
@@ -58,18 +60,18 @@ const RecordingButton = styled(ActionButton)<{
   $again?: boolean;
   $back?: boolean;
 }>`
-  background-color: ${(props) => (props.$back ? "#54194f" : "#f47a52")};
+  background-color: ${(props) => (props.$back ? "#f47a52" : "#54194f")};
   width: max-content;
   border-radius: 48px;
 `;
 
 const RecordingHeader = styled.div`
-position: absolute;
-left: 8px;
-top: 7px;
-display: flex;
-gap: 0.3rem;
-align-items: center;
+  position: absolute;
+  left: 8px;
+  top: 7px;
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
 `;
 const RecordingNowIcon = styled.span`
   width: 0.7rem;
@@ -80,59 +82,41 @@ const RecordingNowIcon = styled.span`
 `;
 
 function TryMe() {
-  const [recordingMsg, setRecordingMsg] = useState<string>("");
-  const [isRecording, setIsRecording] = useState<boolean>(false);
-  const [pauseRecording, setPauseRecording] = useState<boolean>(false);
-  const [recordingCompleted, setRecordingCompleted] = useState<boolean>(false);
-  const recognitionRef = useRef<any>(null);
-  const router = useRouter();
-  const handleRecording = () => {
-    if (!isRecording) {
-      console.log("isRecording, ", isRecording);
-      setIsRecording(true);
-      recognitionRef.current = new window.webkitSpeechRecognition();
-      recognitionRef.current.continuous = true;
-      recognitionRef.current.interimResults = true;
-
-      // saving speech recognition results
-      recognitionRef.current.onresult = (event: any) => {
-        const { transcript } = event.results[event.results.length - 1][0];
-        setRecordingMsg(transcript);
-        console.log("transcript: ", transcript);
-      };
-      recognitionRef.current.start();
-    } else {
-      setPauseRecording(true);
-      setIsRecording(false);
-    }
-  };
-  const stopRecording = () => {
-    setRecordingCompleted(true);
-    recognitionRef.current && recognitionRef?.current?.abort();
-    recordingMsg && recordToAPI(recordingMsg);
-  };
-  const recordingAgain = () => {
-    setRecordingCompleted(false);
-    setIsRecording(false);
-    setRecordingMsg("");
-  };
-  useEffect(() => {
-    return () => {
-      if (recognitionRef.current && recordingCompleted) {
-        recognitionRef?.current?.abort();
-      }
-    };
-  }, [isRecording]);
+  // const [recordingMsg, setRecordingMsg] = useState<string>("");
+  // const [isRecording, setIsRecording] = useState<boolean>(false);
+  // const [pauseRecording, setPauseRecording] = useState<boolean>(false);
+  // const [recordingCompleted, setRecordingCompleted] = useState<boolean>(false);
+  // const recognitionRef = useRef<any>(null);
+  // const router = useRouter();
+  // const handleRecording = () => {
+  //   if (!isRecording) {
+  //     setIsRecording(true);
+  //   } else {
+  //     setIsRecording(false);
+  //   }
+  // };
+  // const stopRecording = () => {
+  //   setRecordingCompleted(true);
+  // };
+  // const recordingAgain = () => {
+  //   setRecordingCompleted(false);
+  //   setIsRecording(false);
+  //   setRecordingMsg("");
+  // };
+  // useEffect(() => {}, [isRecording]);
   return (
     <CenteredFlexContainer>
-      {!recordingCompleted &&
+      <h1>Voice Recorder</h1>
+      {/* <Recorder /> */}
+        <ReactRecorder />
+      {/* {!recordingCompleted &&
         (!isRecording ? (
           <RoundedBorder onClick={handleRecording}>
             <MdOutlineKeyboardVoice size="70" fill="white" />
           </RoundedBorder>
         ) : (
-          <RoundedBorder style={{ cursor: "not-allowed" }} disabled>
-            <MdKeyboardVoice size="70" fill="white" />
+          <RoundedBorder>
+            <FaStop size="70" fill="white" onClick={stopRecording}/>
           </RoundedBorder>
         ))}
 
@@ -173,7 +157,7 @@ function TryMe() {
             </RecordingButton>
           </FlexContainer>
         </MessageWrapper>
-      )}
+      )} */}
     </CenteredFlexContainer>
   );
 }
