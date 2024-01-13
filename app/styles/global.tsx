@@ -1,13 +1,26 @@
 import styled, { css } from "styled-components";
+import { device } from "./breakPoints";
 
 export const Container = styled.div`
   padding: 2rem 13rem;
+  @media ${device.md} {
+    padding: 0;
+  }
 `;
 export const FlexContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
+`;
+export const HeaderContainer = styled(FlexContainer)`
+  @media ${device.lg} {
+    flex-direction: column-reverse;
+  }
+`;
+export const NavWrapper = styled(FlexContainer)`
+   {
+  }
 `;
 export const CenteredFlexContainer = styled.div`
   display: flex;
@@ -17,7 +30,11 @@ export const CenteredFlexContainer = styled.div`
   height: 100%;
   padding: 10% 0px 5%;
 `;
-
+export const HomeFlexContainer = styled.div`
+  @media ${device.md} {
+    justify-content: flex-start;
+  }
+`;
 export const ActionButton = styled.a`
   background-color: #54194f;
   color: white;
@@ -100,6 +117,9 @@ export const NavMenu = styled.div`
   justify-content: space-between;
   padding: 2rem 13rem;
   background-color: #ffd4ac;
+  @media ${device.md} {
+    padding: 2rem 1rem;
+  }
 `;
 export const MenuLink = styled.a<{ $primary?: boolean }>`
   font-weight: bold;
@@ -120,43 +140,48 @@ export const MenuContainer = styled.div`
   justify-content: space-between;
 `;
 const Button = styled.button<{ $primary?: boolean }>`
-background: transparent;
-border-radius: 3px;
-border: 2px solid #f47a52;
-color: #f47a52;
-margin: 0.5em 1em;
-padding: 0.25em 1em;
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid #f47a52;
+  color: #f47a52;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
 
-${(props) =>
-  props.$primary &&
-  css`
-    background: #f47a52;
-    color: white;
-  `}
+  ${(props) =>
+    props.$primary &&
+    css`
+      background: #f47a52;
+      color: white;
+    `}
 `;
 
 export const HeaderWrapper = styled.div`
-display: flex;
-flex-direction: column;
-font-family: "Tommy Soft Regular";
-align-items: center;
-justify-content: center;
-gap: 1rem;
-text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-family: "Tommy Soft Regular";
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
 `;
 export const BigTitle = styled.span`
-font-size: 5rem;
-color: #f47a52;
-font-family: monospace;
-font-weight: bolder;
-letter-spacing: -3px;
-text-transform: capitalize;
-line-height: 93px;
+  font-size: 5rem;
+  color: #f47a52;
+  font-family: monospace;
+  font-weight: bolder;
+  letter-spacing: -3px;
+  text-transform: capitalize;
+  line-height: 93px;
+
+  @media ${device.lg} {
+    font-size: 3rem;
+    line-height: 60px;
+  }
 `;
 export const Title = styled.span`
-font-family: monospace;
-font-size: 1.3rem;
-background: #f0fbff;
-padding: 3rem 1rem;
-border: 1px solid #d8ddf0;
+  font-family: monospace;
+  font-size: 1.3rem;
+  background: #f0fbff;
+  padding: 3rem 1rem;
+  border: 1px solid #d8ddf0;
 `;
