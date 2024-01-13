@@ -24,7 +24,8 @@ function toTimeString(totalSeconds: number) {
 function RecordVoice() {
   const recorderControls = useAudioRecorder();
   const [recordedCompleted, setRecordedCompleted] = useState<boolean>();
-  
+
+  //------ Recording saved to API -------
   useEffect(() => {
     if (recorderControls.recordingBlob) {
       setRecordedCompleted(true);
@@ -81,9 +82,9 @@ function RecordVoice() {
             >
               Record again
             </RecordingButton>
-            <Link href={"/"}>
-              <RecordingButton $back>Return to Home</RecordingButton>
-            </Link>
+            <RecordingButton $back href="/">
+              Return to Home
+            </RecordingButton>
           </FlexContainer>
         </MessageWrapper>
       )}

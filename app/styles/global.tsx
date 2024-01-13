@@ -12,6 +12,7 @@ export const FlexContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  // flex-wrap: wrap;
 `;
 export const HeaderContainer = styled(FlexContainer)`
   @media ${device.lg} {
@@ -29,6 +30,10 @@ export const CenteredFlexContainer = styled.div`
   flex-direction: column;
   height: 100%;
   padding: 10% 0px 5%;
+  @media ${device.md} {
+    height: 80%;
+    padding: 0;
+  }
 `;
 export const HomeFlexContainer = styled.div`
   @media ${device.md} {
@@ -63,6 +68,7 @@ export const InfoWrapper = styled.span`
   justify-content: center;
   display: flex;
   position: relative;
+  border-radius: 20px;
 `;
 
 export const RoundedBorder = styled.button`
@@ -80,7 +86,6 @@ export const RoundedBorder = styled.button`
 `;
 export const MessageWrapper = styled.span`
   background: transparent;
-  width: 29rem;
   display: flex;
   align-items: center;
   justify-content: center;
