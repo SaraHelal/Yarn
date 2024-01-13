@@ -11,6 +11,7 @@ import { ActionButton } from "../styles/global";
 // import { useRouter } from "next/navigation";
 // import recordToAPI from "@/app/api/RecordToAPI";
 import ReactRecorder from '../components/ReactRecorder'
+import RecordVoice from "../components/RecordVoice";
 declare global {
   interface Window {
     webkitSpeechRecognition: any;
@@ -106,9 +107,10 @@ function TryMe() {
   // useEffect(() => {}, [isRecording]);
   return (
     <CenteredFlexContainer>
-      <h1>Voice Recorder</h1>
+      {/* <h1>Voice Recorder</h1> */}
+      <RecordVoice />
       {/* <Recorder /> */}
-        <ReactRecorder />
+        {/* <ReactRecorder /> */}
       {/* {!recordingCompleted &&
         (!isRecording ? (
           <RoundedBorder onClick={handleRecording}>
