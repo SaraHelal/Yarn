@@ -12,9 +12,10 @@ export const FlexContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  // flex-wrap: wrap;
+  flex-wrap: wrap;
 `;
 export const HeaderContainer = styled(FlexContainer)`
+  flex-wrap: nowrap;
   @media ${device.lg} {
     flex-direction: column-reverse;
   }
@@ -28,7 +29,6 @@ export const CenteredFlexContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 100%;
   padding: 10% 0px 5%;
   @media ${device.md} {
     height: 80%;
