@@ -1,12 +1,10 @@
-import Image from 'next/image'
-import Header from './components/header/Header'
-import NavBar from'./components/NavBar'
+"use client";
+import Header from "./components/header/Header";
+import { CenteredFlexContainer } from "./styles/global";
 export default function Home() {
-
   return (
-    <main className="flex flex-col">
-      {/* <NavBar /> */}
+    <CenteredFlexContainer>
       <Header />
-    </main>
-  )
+    </CenteredFlexContainer>
+  );
 }
