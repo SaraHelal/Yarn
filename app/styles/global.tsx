@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   padding: 2rem 13rem;
@@ -48,7 +48,6 @@ export const InfoWrapper = styled.span`
   position: relative;
 `;
 
-
 export const RoundedBorder = styled.button`
   border: 1px solid white;
   border-radius: 50%;
@@ -60,7 +59,7 @@ export const RoundedBorder = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  position:relative;
+  position: relative;
 `;
 export const MessageWrapper = styled.span`
   background: transparent;
@@ -94,4 +93,70 @@ export const RecordingNowIcon = styled.span`
   display: block;
   background-color: red;
   border-radius: 50%;
+`;
+
+export const NavMenu = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 13rem;
+  background-color: #ffd4ac;
+`;
+export const MenuLink = styled.a<{ $primary?: boolean }>`
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #54194f;
+  text-decoration: normal;
+  ${(props) =>
+    props.$primary &&
+    css`
+      color: #f47a52;
+      text-decoration: underline;
+      pointer-events: none;
+      cursor: default;
+    `}
+`;
+export const MenuContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const Button = styled.button<{ $primary?: boolean }>`
+background: transparent;
+border-radius: 3px;
+border: 2px solid #f47a52;
+color: #f47a52;
+margin: 0.5em 1em;
+padding: 0.25em 1em;
+
+${(props) =>
+  props.$primary &&
+  css`
+    background: #f47a52;
+    color: white;
+  `}
+`;
+
+export const HeaderWrapper = styled.div`
+display: flex;
+flex-direction: column;
+font-family: "Tommy Soft Regular";
+align-items: center;
+justify-content: center;
+gap: 1rem;
+text-align: center;
+`;
+export const BigTitle = styled.span`
+font-size: 5rem;
+color: #f47a52;
+font-family: monospace;
+font-weight: bolder;
+letter-spacing: -3px;
+text-transform: capitalize;
+line-height: 93px;
+`;
+export const Title = styled.span`
+font-family: monospace;
+font-size: 1.3rem;
+background: #f0fbff;
+padding: 3rem 1rem;
+border: 1px solid #d8ddf0;
 `;
